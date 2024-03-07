@@ -1,0 +1,47 @@
+.container{
+  width: 100%;
+  height: 55px;
+  background: rgb(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left{
+  display: flex;
+  width: 15%;
+}
+
+.left span{
+  margin-left: 50px;
+  font-weight: 900;
+  font-size: 36px;
+}
+
+.right{
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+  height: 100%;
+}
+
+.searchbar{
+  width: 250px;
+}
+
+.darkMode{
+  height: 100%;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px){
+  .right{
+    display: none;
+  }
+}
