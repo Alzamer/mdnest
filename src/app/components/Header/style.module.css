@@ -54,6 +54,12 @@
   transform: translate(-50%, -50%);
 }
 
+.logo{
+  font-family: "Whisper", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 @media only screen and (max-width: 576px){
   .right{
     display: none;

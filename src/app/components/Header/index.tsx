@@ -45,7 +45,7 @@ export default function Header(){
 
   return <div className={style.container}>
     <div className={style.left}>
-      <span>MDNest</span>
+      <span className={style.logo}>MDNest</span>
     </div>
     <div className={style.searchbar}>
 
