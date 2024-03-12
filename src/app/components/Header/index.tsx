@@ -5,27 +5,41 @@ import { MdDarkMode } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from 'react-modal';
-import { useState, useCallback } from 'react';
-import { signIn, signUp } from './actions'
+import { useState, useCallback, useEffect } from 'react';
 import { useTheme } from 'next-themes'
+import { Auth } from '@supabase/auth-ui-react'
+import { createClient } from '../../../../utils/supabase/client';
+import { signOut } from './actions';
+
+const supabase = createClient();
 
 export default function Header(){
   const [signInModal, setSignInModal] = useState(false);
-  const [signUpModal, setSignUpModal] = useState(false);
   const { theme, setTheme } = useTheme()
+  const [session, setSession] = useState(null);
 
-  const switchSignInModal = useCallback(() => {
-    setSignInModal(!signInModal);
-  }, [signInModal, setSignInModal]);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    console.log('TO JEST NULL');
+    if(session === null){
+      setSignInModal(false);
+    }
+  }, [session]);
 
   const switchTheme = useCallback(() => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   }, [theme, setTheme]);
-
-  const handleSignIn = useCallback(async () => {
-    switchSignInModal();
-    await signIn("", "");
-  }, [switchSignInModal, signIn]);
 
   Modal.setAppElement('body');
 
@@ -40,8 +54,18 @@ export default function Header(){
       <div className={style.darkMode} onClick={switchTheme}>
         { theme === 'light' ? <MdDarkMode/> : <MdOutlineDarkMode/>}
       </div>
-      <p onClick={switchSignInModal}>Sign In</p>
-      <p onClick={() => setSignUpModal(true)}>Sign Up</p>
+      {
+        session ?
+        <p onClick={() => {
+            signOut();
+            setSession(null);
+          }
+        }>Sign Out</p>
+        : <p onClick={() => {
+            setSignInModal(true);
+          }
+        }>Sign In</p>
+      }
     </div>
     <div className={style.rightSmall}>
       <TiThMenu size="1.5em"/>
@@ -49,23 +73,10 @@ export default function Header(){
     <Modal
       isOpen={signInModal}
       onAfterOpen={() => null}
-      onRequestClose={switchSignInModal}
+      onRequestClose={() => setSignInModal(false)}
       className={style.modal}
       contentLabel="Sign in modal">
-      <form>
-        <label htmlFor="email">Email:</label>
-        <input id="email" name="email" type="email" required />
-        <label htmlFor="password">Password:</label>
-        <input id="password" name="password" type="password" required />
-        <button formAction={handleSignIn}>Log in</button>
-      </form>
-    </Modal>
-    <Modal
-      isOpen={signUpModal}
-      onAfterOpen={() => null}
-      onRequestClose={() => setSignUpModal(false)}
-      className={style.modal}
-      contentLabel="Sign up modal">
+      <Auth supabaseClient={supabase}/>
     </Modal>
   </div>;
 }
