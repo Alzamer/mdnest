@@ -10,6 +10,7 @@ import { useTheme } from 'next-themes'
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
 import { signOut } from './actions';
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 const supabase = createClient();
 
@@ -55,8 +56,8 @@ export default function Header(){
 
     </div>
     <div className={style.right}>
-      <div className={style.darkMode} onClick={switchTheme}>
-        { theme === 'light' ? <MdDarkMode/> : <MdOutlineDarkMode/>}
+      <div className={style.darkMode}>
+        { theme === 'light' ? <MdDarkMode onClick={switchTheme}/> : <MdOutlineDarkMode onClick={switchTheme}/>}
       </div>
       {
         session ?
@@ -65,7 +66,7 @@ export default function Header(){
       }
     </div>
     <div className={style.rightSmall}>
-      <TiThMenu size="1.5em"/>
+      <TiThMenu size="1.5em" onClick={() => setSignInModal(true)}/>
     </div>
     <Modal
       isOpen={signInModal}
@@ -73,7 +74,12 @@ export default function Header(){
       onRequestClose={() => setSignInModal(false)}
       className={style.modal}
       contentLabel="Sign in modal">
-      <Auth supabaseClient={supabase}/>
+      <Auth 
+        supabaseClient={supabase}
+        providers={['google']}
+        appearance={{ theme: ThemeSupa }}
+        theme={theme === 'dark' ? 'dark' : 'default'}
+      />
     </Modal>
   </div>;
 }
