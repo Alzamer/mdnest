@@ -9,15 +9,15 @@ import { useState, useCallback, useEffect } from 'react';
 import { useTheme } from 'next-themes'
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
-import { signOut } from './actions';
+import { signOut, navigate } from './actions';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 const supabase = createClient();
 
 export default function Header(){
   const [signInModal, setSignInModal] = useState(false);
-  const { theme, setTheme } = useTheme()
   const [session, setSession] = useState(null);
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -42,26 +42,31 @@ export default function Header(){
 
   const handleSignOut = async () => {
     const result = await signOut();
-    if(result)
+    if(result){
       setSession(null);
+      navigate('/');
+    }
   }
 
   Modal.setAppElement('body');
 
   return <div className={style.container}>
     <div className={style.left}>
-      <span className={style.logo}>MDNest</span>
+      <span className={style.logo} onClick={() => navigate('/')}>MDNest</span>
     </div>
     <div className={style.searchbar}>
 
     </div>
     <div className={style.right}>
-      <div className={style.darkMode}>
-        { theme === 'light' ? <MdDarkMode onClick={switchTheme}/> : <MdOutlineDarkMode onClick={switchTheme}/>}
+      <div className={style.darkMode} onClick={switchTheme}>
+        { theme === 'light' ? <MdDarkMode/> : <MdOutlineDarkMode/>}
       </div>
       {
         session ?
-        <p onClick={handleSignOut}>Sign Out</p>
+        <>
+          <p onClick={() => navigate('/profile')}>Profile</p>
+          <p onClick={handleSignOut}>Sign Out</p>
+        </>
         : <p onClick={() => setSignInModal(true)}>Sign In</p>
       }
     </div>

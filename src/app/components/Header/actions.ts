@@ -1,5 +1,6 @@
 'use server'
 
+import { redirect } from 'next/navigation'
 import { createClient } from '../../../../utils/supabase/client';
 
 export async function signOut() {
@@ -8,4 +9,8 @@ export async function signOut() {
   if(error)
     return false;
   return true;
+}
+
+export async function navigate(url: string){
+  redirect(url);
 }
