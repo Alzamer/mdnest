@@ -31,15 +31,19 @@ export default function Header(){
   }, []);
 
   useEffect(() => {
-    console.log('TO JEST NULL');
-    if(session === null){
+    if(session !== null)
       setSignInModal(false);
-    }
   }, [session]);
 
   const switchTheme = useCallback(() => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   }, [theme, setTheme]);
+
+  const handleSignOut = async () => {
+    const result = await signOut();
+    if(result)
+      setSession(null);
+  }
 
   Modal.setAppElement('body');
 
@@ -56,15 +60,8 @@ export default function Header(){
       </div>
       {
         session ?
-        <p onClick={() => {
-            signOut();
-            setSession(null);
-          }
-        }>Sign Out</p>
-        : <p onClick={() => {
-            setSignInModal(true);
-          }
-        }>Sign In</p>
+        <p onClick={handleSignOut}>Sign Out</p>
+        : <p onClick={() => setSignInModal(true)}>Sign In</p>
       }
     </div>
     <div className={style.rightSmall}>
