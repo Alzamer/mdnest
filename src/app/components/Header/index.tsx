@@ -50,7 +50,7 @@ export default function Header(){
 
   Modal.setAppElement('body');
 
-  return <div className={style.container}>
+  return <div className={`${style.container} ${theme === 'dark' ? style.dark : null}`}>
     <div className={style.left}>
       <span className={style.logo} onClick={() => navigate('/')}>MDNest</span>
     </div>
