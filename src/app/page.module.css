@@ -1,6 +1,6 @@
 .container{
   display: flex;
   justify-content: center;
-  padding: 6rem;
-  min-height: 100vh;
+  height: 1500px;
+  margin-top: 20px;
 }

@@ -28,6 +28,7 @@
 .right{
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
   width: 200px;
   height: 100%;
 }

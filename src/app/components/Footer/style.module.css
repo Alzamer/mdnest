@@ -9,10 +9,9 @@
 
 .column{
   display: flex;
-  flex-direction: column;
-  align-content: space-around;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  width: 200px;
+  width: 175px;
   height: 100%;
 }
