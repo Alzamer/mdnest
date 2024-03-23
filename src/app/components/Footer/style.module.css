@@ -15,3 +15,7 @@
   width: 175px;
   height: 100%;
 }
+
+.column p:last-child{
+  margin-bottom: 13px;
+}
