@@ -1,9 +1,8 @@
 import style from './style.module.css'
+import NoteCard from '../NoteCard';
 
 export default function Content(){
   return <div className={style.container}>
-    <div>#1</div>
-    <div>#2</div>
-    <div>#3</div>
+    <NoteCard/>
   </div>;
 }
