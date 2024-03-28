@@ -1,7 +1,12 @@
-import style from './style.module.css'
+'use client';
+
+import style from './style.module.css';
+import { navigate } from './actions';
 
 export default function AddNote(){
   return <div className={style.container}>
-    <b>+</b>
+    <div className={style.handler} onClick={() => navigate('/create')}>
+      <b>+</b>
+    </div>
   </div>;
 }
