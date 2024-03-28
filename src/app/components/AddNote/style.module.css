@@ -7,9 +7,10 @@
   border-radius: 40px;
   font-size: 30px;
   position: sticky;
-  margin-left: 850px;
   bottom: 30px;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: 15px;
   color: white;
   background: orange;
 }
