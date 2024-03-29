@@ -1,7 +1,11 @@
 'use server'
 
+import { createClient } from './supabase/client';
 import { redirect } from 'next/navigation'
-import { createClient } from '../../../../utils/supabase/client';
+
+export async function navigate(url: string) {
+  redirect(url);
+}
 
 export async function signOut() {
   const supabase = createClient()
@@ -9,8 +13,4 @@ export async function signOut() {
   if(error)
     return false;
   return true;
-}
-
-export async function navigate(url: string){
-  redirect(url);
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import style from './style.module.css';
-import { navigate } from './actions';
+import { navigate } from '../../../../utils/actions';
 
 export default function AddNote(){
   return <div className={style.container}>

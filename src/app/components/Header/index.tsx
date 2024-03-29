@@ -9,7 +9,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useTheme } from 'next-themes'
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
-import { signOut, navigate } from './actions';
+import { signOut, navigate } from '../../../../utils/actions';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 const supabase = createClient();
