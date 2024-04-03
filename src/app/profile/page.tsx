@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
 import { createClient } from '../../../utils/supabase/client';
-import { navigate } from './actions';
+import { navigate } from '../../../utils/actions';
 import { useEffect } from 'react';
 
 interface TabPanelProps {
