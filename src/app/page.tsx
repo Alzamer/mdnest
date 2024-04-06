@@ -1,4 +1,3 @@
-import './global.css';
 import styles from "./page.module.css";
 import Content from './components/Content';
 import Filter from './components/Filter';
