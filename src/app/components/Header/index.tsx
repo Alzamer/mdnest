@@ -9,16 +9,17 @@ import { useState, useCallback, useEffect } from 'react';
 import { useTheme } from 'next-themes'
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
-import { signOut, navigate } from '../../../../utils/actions';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { useRouter } from 'next/navigation'
 
 const supabase = createClient();
 
 export default function Header(){
+  const router = useRouter();
   const [signInModal, setSignInModal] = useState(false);
   const [session, setSession] = useState(null);
   const { theme, setTheme } = useTheme()
-
+  
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -41,18 +42,15 @@ export default function Header(){
   }, [theme, setTheme]);
 
   const handleSignOut = async () => {
-    const result = await signOut();
-    if(result){
-      setSession(null);
-      navigate('/');
-    }
+    await supabase.auth.signOut();
+    router.push('/');
   }
 
   Modal.setAppElement('body');
 
   return <div className={`${style.container} ${theme === 'dark' ? style.dark : null}`}>
     <div className={style.left}>
-      <span className={style.logo} onClick={() => navigate('/')}>MDNest</span>
+      <span className={style.logo} onClick={() => router.push('/')}>MDNest</span>
     </div>
     <div className={style.searchbar}>
 
@@ -64,7 +62,7 @@ export default function Header(){
       {
         session ?
         <>
-          <p onClick={() => navigate('/profile')}>Profile</p>
+          <p onClick={() => router.push('/profile')}>Profile</p>
           <p onClick={handleSignOut}>Sign Out</p>
         </>
         : <p onClick={() => setSignInModal(true)}>Sign In</p>
