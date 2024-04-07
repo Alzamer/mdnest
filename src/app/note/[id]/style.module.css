@@ -1,0 +1,22 @@
+.container{
+  width: 100%;
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header{
+  width: 700px;
+  height: 100px;
+}
+
+.content{
+  width: 700px;
+  height: 500px;
+}
+
+.comments{
+  width: 700px;
+  height: 300px;
+}
