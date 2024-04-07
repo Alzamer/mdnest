@@ -5,12 +5,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
-import { createClient } from '../../../utils/supabase/client';
-import { useEffect } from 'react';
+import { ReactNode, SyntheticEvent, useState } from 'react';
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   index: number;
   value: number;
 }
@@ -42,22 +40,9 @@ function a11yProps(index: number) {
   };
 }
 
-const supabase = createClient();
-
-const getSession = async () => {
-  const { data: { user } } = await supabase.auth.getUser()
-  console.log("DATA: ", user);
-  if(user === null)
-    navigate("/");
-};
-
 export default function Page(){
-  useEffect(() => {
-    getSession()
-  }, []);
-
   const [value, setValue] = useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
