@@ -1,10 +1,12 @@
 'use client';
 
-import style from './style.module.css'
+import style from './style.module.css';
+import 'react-awesome-button/dist/styles.css';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { AwesomeButton } from 'react-awesome-button';
 import { ReactNode, SyntheticEvent, useState } from 'react';
 
 interface TabPanelProps {
@@ -56,7 +58,7 @@ export default function Page(){
           <p className={style.username}>USERNAME</p>
           <p className={style.date}>CREATED AT</p>
         </div>
-        <button>Follow</button>
+        <AwesomeButton type="primary">Follow</AwesomeButton>
       </div>
       <div>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

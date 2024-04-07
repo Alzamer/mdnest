@@ -30,3 +30,19 @@
 .date{
   font-size: 16px;
 }
+
+.aws-btn {
+  --button-default-height: 48px;
+  --button-default-font-size: 16px;
+  --button-default-border-radius: 16px;
+  --button-horizontal-padding: 23px;
+  --button-raise-level: 4px;
+  --button-hover-pressure: 2.75;
+  --transform-speed: 0.125s;
+  --button-primary-color: #1e88e5;
+  --button-primary-color-dark: #1360a4;
+  --button-primary-color-light: #ffffff;
+  --button-primary-color-hover: #187bd1;
+  --button-primary-color-active: #166dba;
+  --button-primary-border: none;
+}
