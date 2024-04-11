@@ -1,6 +1,6 @@
 import style from './style.module.css';
 
-export default function NoteCard(){
+export default async function NoteCard(){
   return <div className={style.container}>
     <h1>Example #1</h1>
     <div className={style.info}>
