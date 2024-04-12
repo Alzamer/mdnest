@@ -19,14 +19,15 @@ export default async function NoteCard({ title, author, upvotes, date, content, 
     onClick={() => router.push(`/note/${uuid}`)}>
     <h1>{ title }</h1>
     <div className={style.info}>
-      <p>{ author }</p>
-      <p>{ upvotes }</p>
-      <p>{ date }</p>
+      <p>Author</p>
+      <p>👍 { upvotes }</p>
+      <p>{ date.slice(0, 10) }</p>
     </div>
     <div className={style.description}>
       {
-        content
+        content.slice(0, 60)
       }
+      ...
     </div>
   </div>;
 }

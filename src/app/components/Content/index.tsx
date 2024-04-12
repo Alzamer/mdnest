@@ -10,7 +10,6 @@ export default async function Content(){
   .select();
 
   return <div className={style.container}>
-    <ul>
     {
       data?.map(row => <NoteCard
         title={row.title}
@@ -19,8 +18,8 @@ export default async function Content(){
         date={row.createdAt}
         content={row.content}
         uuid={row.id}
+        key={row.id}
       />)
     }
-    </ul>
   </div>;
 }

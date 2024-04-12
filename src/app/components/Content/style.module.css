@@ -1,6 +1,9 @@
 .container{
-  width: 750px;
+  width: 800px;
+  height: 1200px;
   margin-left: 10px;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: start;
 }
