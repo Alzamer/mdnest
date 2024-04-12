@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense } from 'react';
 import styles from "./page.module.css";
 import Content from './components/Content';
 import Filter from './components/Filter';
