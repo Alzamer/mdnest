@@ -15,6 +15,7 @@ export default async function Content(){
         title={row.title}
         author={row.author}
         upvotes={row.upvotes}
+        downvotes={row.downvotes}
         date={row.createdAt}
         content={row.content}
         uuid={row.id}
