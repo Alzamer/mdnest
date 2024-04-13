@@ -5,15 +5,27 @@ import { createClient } from '../../../../utils/supabase/server';
 const supabase = createClient();
 
 export default async function Content(){
+  const authors: any[] = [];
   const { data, error } = await supabase
   .from('notes')
   .select();
 
+  for(let i of data!){
+    const { data, error } = await supabase
+    .from('profiles')
+    .select('username')
+    .match({
+      id: i.author
+    });
+
+    authors.push(data![0].username);
+  }
+
   return <div className={style.container}>
     {
-      data?.map(row => <NoteCard
+      data?.map((row, index) => <NoteCard
         title={row.title}
-        author={row.author}
+        author={authors[index]}
         upvotes={row.upvotes}
         downvotes={row.downvotes}
         date={row.createdAt}

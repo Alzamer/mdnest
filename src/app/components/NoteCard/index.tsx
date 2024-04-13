@@ -15,12 +15,12 @@ interface note{
 
 export default async function NoteCard({ title, author, upvotes, downvotes, date, content, uuid } : note){
   const router = useRouter();
-
+  console.log(author);
   return <div className={style.container}
     onClick={() => router.push(`/note/${uuid}`)}>
     <h1>{ title }</h1>
     <div className={style.info}>
-      <p>Author</p>
+      <p>{ author }</p>
       <p>👍 { upvotes - downvotes }</p>
       <p>{ date.slice(0, 10) }</p>
     </div>
