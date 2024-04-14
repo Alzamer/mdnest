@@ -6,7 +6,6 @@ import { TiThMenu } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from 'react-modal';
 import { useState, useCallback, useEffect } from 'react';
-import { useTheme } from 'next-themes'
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
@@ -18,7 +17,6 @@ export default function Header(){
   const router = useRouter();
   const [signInModal, setSignInModal] = useState(false);
   const [session, setSession] = useState(null);
-  const { theme, setTheme } = useTheme()
   
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -37,9 +35,6 @@ export default function Header(){
       setSignInModal(false);
   }, [session]);
 
-  const switchTheme = useCallback(() => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  }, [theme, setTheme]);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -48,7 +43,7 @@ export default function Header(){
 
   Modal.setAppElement('body');
 
-  return <div className={`${style.container} ${theme === 'dark' ? style.dark : null}`}>
+  return <div className={`${style.container}`}>
     <div className={style.left}>
       <span className={style.logo} onClick={() => router.push('/')}>MDNest</span>
     </div>
@@ -56,8 +51,8 @@ export default function Header(){
 
     </div>
     <div className={style.right}>
-      <div className={style.darkMode} onClick={switchTheme}>
-        { theme === 'light' ? <MdDarkMode/> : <MdOutlineDarkMode/>}
+      <div className={style.darkMode}>
+        <MdOutlineDarkMode/>
       </div>
       {
         session ?
@@ -81,7 +76,6 @@ export default function Header(){
         supabaseClient={supabase}
         providers={['google']}
         appearance={{ theme: ThemeSupa }}
-        theme={theme === 'dark' ? 'dark' : 'default'}
       />
     </Modal>
   </div>;

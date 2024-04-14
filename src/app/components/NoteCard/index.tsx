@@ -15,7 +15,7 @@ interface note{
 
 export default async function NoteCard({ title, author, upvotes, downvotes, date, content, uuid } : note){
   const router = useRouter();
-  console.log(author);
+
   return <div className={style.container}
     onClick={() => router.push(`/note/${uuid}`)}>
     <h1>{ title }</h1>

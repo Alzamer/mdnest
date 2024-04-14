@@ -2,6 +2,7 @@ import styles from './style.module.css';
 import Comments from '@/app/components/Comments';
 
 export default function Page({ params } : { params : { id : number}}) {
+  console.log(params);
   return <div className={styles.container}>
     <div className={styles.header}>TITLE</div>
     <div className={styles.content}>
