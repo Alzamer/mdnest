@@ -6,8 +6,11 @@ export default async function Comments(){
   return <div className={style.container}>
     <div className={style.comments}>
       <div className={style.input}>
-      <Input size='massive' placeholder='Add comment'/>
-      <Button>Add comment</Button>
+        <Input size='massive' placeholder='Add comment'/>
+        <Button>Add comment</Button>
+      </div>
+      <div>
+        COMMENTS
       </div>
     </div>
   </div>;
