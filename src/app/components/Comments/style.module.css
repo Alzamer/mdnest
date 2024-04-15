@@ -2,6 +2,7 @@
   width: 850px;
   height:200px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -14,4 +15,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.content{
+  width: 100%;
 }

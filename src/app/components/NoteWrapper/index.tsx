@@ -4,7 +4,6 @@ import styles from './style.module.css';
 import { marked } from 'marked';
 import { createClient } from '../../../../utils/supabase/server';
 import parse from 'html-react-parser';
-import sanitizeHtml from 'sanitize-html';
 
 export default async function NoteWrapper({ uuid } : { uuid : string }) {
 	const supabase = createClient();

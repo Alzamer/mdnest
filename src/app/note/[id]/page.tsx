@@ -5,9 +5,10 @@ import { Suspense } from 'react';
 
 export default function Page({ params } : { params : { id : string}}) {
   return <div className={styles.container}>
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <NoteWrapper uuid={params.id}/>
-    </Suspense>
-    <Comments/>
+    <Comments id={params.id}>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <NoteWrapper uuid={params.id}/>
+      </Suspense>
+    </Comments>
   </div>;
 }
