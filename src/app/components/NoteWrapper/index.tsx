@@ -1,7 +1,10 @@
 'use server';
 
 import styles from './style.module.css';
+import { marked } from 'marked';
 import { createClient } from '../../../../utils/supabase/server';
+import parse from 'html-react-parser';
+import sanitizeHtml from 'sanitize-html';
 
 export default async function NoteWrapper({ uuid } : { uuid : string }) {
 	const supabase = createClient();
@@ -13,6 +16,8 @@ export default async function NoteWrapper({ uuid } : { uuid : string }) {
 		id: uuid
 	});
 
+  const content = await marked.parse(data![0].content);
+
 	return <>
     <div className={styles.header}>
 			<h1>
@@ -21,7 +26,7 @@ export default async function NoteWrapper({ uuid } : { uuid : string }) {
 		</div>
     <div className={styles.content}>
 			{
-				data![0].content
+				parse(content)
 			}
     </div>
   </>;
