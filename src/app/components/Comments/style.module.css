@@ -8,7 +8,9 @@
 
 .comments{
   width: 850px;
-  height: 350px;
+  height: 150px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .input{
