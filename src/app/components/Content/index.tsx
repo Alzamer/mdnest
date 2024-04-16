@@ -8,7 +8,8 @@ export default async function Content(){
   const authors: any[] = [];
   const { data, error } = await supabase
   .from('notes')
-  .select();
+  .select()
+  .range(0, 11);
 
   for(let i of data!){
     const { data, error } = await supabase
