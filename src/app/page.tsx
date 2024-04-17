@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import styles from "./page.module.css";
 import Content from './components/Content';
-import Filter from './components/Filter';
+import MainPageWrapper from './components/MainPageWrapper';
 
 export default function Home({
   searchParams,
@@ -13,10 +13,11 @@ export default function Home({
 }) {
   return (
     <main className={styles.container}>
-      <Filter/>
-      <Suspense fallback={<h1>Loading...</h1>}> 
-        <Content searchParams={searchParams}/>
-      </Suspense>
+      <MainPageWrapper>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Content searchParams={searchParams} />
+        </Suspense>
+      </MainPageWrapper>
     </main>
   );
 }

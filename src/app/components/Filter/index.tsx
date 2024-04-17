@@ -31,25 +31,28 @@ const sortByAuthor = [{
   value: 'Z-A'
 }];
 
-export default function Filter(){
+export default function Filter({upvotes, dates, authors} : { upvotes: any, dates: any, authors: any}){
   return <div className={style.container}>
     Sort by upvotes
     <Dropdown
       placeholder='Ascending or descending'
       selection
       options={sortByUpvotes}
+      onChange={(e) => console.log(e.target.innerText)}
     />
     Sort by date    
     <Dropdown
       placeholder='From newest to oldest'
       selection
       options={sortByDate}
+      onChange={(e) => console.log(e.target.innerText)}
     />
     Sort by author
     <Dropdown
       placeholder='Alphabetically'
       selection
       options={sortByAuthor}
+      onChange={(e) => console.log(e.target.innerText)}
     />
   </div>
 }
