@@ -1,7 +1,6 @@
 'use client'
 
 import style from './style.module.css';
-import { MdDarkMode } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from 'react-modal';
