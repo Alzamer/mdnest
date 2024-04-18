@@ -3,8 +3,9 @@
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import styles from "./style.module.css";
+import { ReactNode } from 'react';
 
-export default function Pagination({ children, count } : { children: any, count: number }) {
+export default function Pagination({ children, count } : { children: ReactNode, count: number }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();

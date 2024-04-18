@@ -4,7 +4,7 @@ import style from './style.module.css';
 import { TiThMenu } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from 'react-modal';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
@@ -12,25 +12,32 @@ import { useRouter } from 'next/navigation'
 
 const supabase = createClient();
 
-export default function Header(){
+export default function Header() {
   const router = useRouter();
   const [signInModal, setSignInModal] = useState(false);
-  const [session, setSession] = useState(null);
-  
+  const [session, setSession] = useState<any>();
+
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    let connection = null;
+    (async () => {
+      const { data: { session }} = await supabase.auth.getSession();
+      
+      if(session === null)
+        return;
+
       setSession(session);
-    });
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-    return () => subscription.unsubscribe();
+
+      const { data: { subscription } } = await supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+        connection = subscription;
+      })
+    })();
+
+    return () => connection!.unsubscribe();
   }, []);
 
   useEffect(() => {
-    if(session !== null)
+    if (session !== null)
       setSignInModal(false);
   }, [session]);
 
@@ -51,19 +58,19 @@ export default function Header(){
     </div>
     <div className={style.right}>
       <div className={style.darkMode}>
-        <MdOutlineDarkMode/>
+        <MdOutlineDarkMode />
       </div>
       {
         session ?
-        <>
-          <p onClick={() => router.push('/profile')}>Profile</p>
-          <p onClick={handleSignOut}>Sign Out</p>
-        </>
-        : <p onClick={() => setSignInModal(true)}>Sign In</p>
+          <>
+            <p onClick={() => router.push('/profile')}>Profile</p>
+            <p onClick={handleSignOut}>Sign Out</p>
+          </>
+          : <p onClick={() => setSignInModal(true)}>Sign In</p>
       }
     </div>
     <div className={style.rightSmall}>
-      <TiThMenu size="1.5em" onClick={() => setSignInModal(true)}/>
+      <TiThMenu size="1.5em" onClick={() => setSignInModal(true)} />
     </div>
     <Modal
       isOpen={signInModal}
@@ -71,7 +78,7 @@ export default function Header(){
       onRequestClose={() => setSignInModal(false)}
       className={style.modal}
       contentLabel="Sign in modal">
-      <Auth 
+      <Auth
         supabaseClient={supabase}
         providers={['google']}
         appearance={{ theme: ThemeSupa }}

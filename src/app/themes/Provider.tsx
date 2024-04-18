@@ -1,8 +1,8 @@
 'use client';
-import React from 'react';
+import { ReactNode } from 'react';
 import { ThemeProvider } from 'next-themes';
 
-const Provider = ({ children }: { children: React.ReactNode }) => {
+const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light">
       {children}

@@ -57,7 +57,7 @@ export default async function Content({
     return <div className={style.container}>
       <Pagination count={NUMBER_OF_PAGES}>
       {
-        data?.map((row, index) => <NoteCard
+        data.map((row, index) => <NoteCard
           title={row.title}
           author={authors[index]}
           upvotes={row.upvotes}

@@ -38,21 +38,21 @@ export default function Filter({ upvotes, dates, authors }: { upvotes: any, date
       placeholder='Ascending or descending'
       selection
       options={sortByUpvotes}
-      onChange={(e) => console.log(e.target.innerText)}
+      onChange={(e) => console.log}
     />
     Sort by date
     <Dropdown
       placeholder='From newest to oldest'
       selection
       options={sortByDate}
-      onChange={(e) => console.log(e.target.innerText)}
+      onChange={(e) => console.log}
     />
     Sort by author
     <Dropdown
       placeholder='Alphabetically'
       selection
       options={sortByAuthor}
-      onChange={(e) => console.log(e.target.innerText)}
+      onChange={(e) => console.log}
     />
   </div>
 }

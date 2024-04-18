@@ -4,12 +4,19 @@ import { createClient } from '../../../../utils/supabase/server';
 const supabase = createClient();
 
 export default async function ProfileHeader(){
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user }, error: getUserError } = await supabase.auth.getUser();
+
+  if(getUserError)
+    throw getUserError;
+
+  if(user === null)
+    return;
+
   const { data, error } = await supabase
   .from('profiles')
   .select()
   .match({
-    id: user!.id
+    id: user.id
   });
 
   if(error)

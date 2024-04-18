@@ -13,7 +13,7 @@ export default function Page(){
       <h1>
         <MDEditor
           value={value}
-          onChange={setValue}
+          onChange={setValue as () => void}
           height={600}
           minHeight={600}
           maxHeight={600}

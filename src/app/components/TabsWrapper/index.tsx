@@ -42,7 +42,7 @@ function a11yProps(index: number) {
 
 export default function TabsWrapper(){
   const [value, setValue] = useState(0);
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   
