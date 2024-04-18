@@ -4,14 +4,14 @@ import style from './style.module.css'
 import { Dropdown } from 'semantic-ui-react'
 
 const sortByUpvotes = [{
-    key: 'Ascending',
-    text: 'Ascending',
-    value: 'Ascending'
-  }, {
-    key: 'Descending',
-    text: 'Descending',
-    value: 'Descending'
-  }];
+  key: 'Ascending',
+  text: 'Ascending',
+  value: 'Ascending'
+}, {
+  key: 'Descending',
+  text: 'Descending',
+  value: 'Descending'
+}];
 const sortByDate = [{
   key: 'From newest to oldest',
   text: 'From newest to oldest',
@@ -31,7 +31,7 @@ const sortByAuthor = [{
   value: 'Z-A'
 }];
 
-export default function Filter({upvotes, dates, authors} : { upvotes: any, dates: any, authors: any}){
+export default function Filter({ upvotes, dates, authors }: { upvotes: any, dates: any, authors: any }) {
   return <div className={style.container}>
     Sort by upvotes
     <Dropdown
@@ -40,7 +40,7 @@ export default function Filter({upvotes, dates, authors} : { upvotes: any, dates
       options={sortByUpvotes}
       onChange={(e) => console.log(e.target.innerText)}
     />
-    Sort by date    
+    Sort by date
     <Dropdown
       placeholder='From newest to oldest'
       selection

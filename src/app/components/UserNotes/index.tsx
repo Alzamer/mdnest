@@ -5,6 +5,6 @@ const supabase = createClient();
 
 export default async function UserNotes(){
   return <div className={style.container}>
-    DUPA  
+     
   </div>
 }

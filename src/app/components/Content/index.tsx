@@ -17,14 +17,17 @@ export default async function Content({
     const authors: any[] = [];
     let currentPage = Number(searchParams?.page) || 0;
 
-    const { data: _, count } = await supabase
+    let { data: _, count} = await supabase
     .from('notes')
     .select('*', { count: 'exact' })
+
+    if(count === null)
+      count = 0;
 
     if(currentPage < 0)
       currentPage = 0;
 
-    const NUMBER_OF_PAGES = Math.floor(count! / CARDS_ON_PAGE);
+    const NUMBER_OF_PAGES = Math.floor(count / CARDS_ON_PAGE);
 
     if(currentPage > NUMBER_OF_PAGES)
       currentPage = NUMBER_OF_PAGES;
@@ -34,7 +37,10 @@ export default async function Content({
     .select()
     .range((currentPage * CARDS_ON_PAGE), (currentPage * CARDS_ON_PAGE) + CARDS_ON_PAGE - 1);
 
-    for(let i of data!){
+    if(error)
+      throw error;
+
+    for(let i of data){
       const { data, error } = await supabase
       .from('profiles')
       .select('username')
@@ -42,7 +48,10 @@ export default async function Content({
         id: i.author
       });
 
-      authors.push(data![0].username);
+      if(error)
+        throw error;
+
+      authors.push(data[0].username);
     }
 
     return <div className={style.container}>

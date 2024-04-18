@@ -15,6 +15,9 @@ export default async function NoteWrapper({ uuid } : { uuid : string }) {
 		id: uuid
 	});
 
+  if(error)
+    throw error;
+
   const content = await marked.parse(data![0].content);
 
 	return <>

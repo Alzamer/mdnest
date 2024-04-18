@@ -19,6 +19,9 @@ export default function Comments({ children, id } : { children: ReactElement, id
         note: id
       });
 
+      if(error)
+        throw error;
+
       setComments(data);
     })();
   });
@@ -34,6 +37,8 @@ export default function Comments({ children, id } : { children: ReactElement, id
         comment: commentText,
       });
       setCommentText('');
+      if(error)
+        throw error;
     })()
   };
 

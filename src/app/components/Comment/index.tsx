@@ -15,7 +15,11 @@ export default function Comment({ author, comment, createdAt} : { author: string
       .match({
         id: author
       })
-      setCommentAuthor(data![0].username);
+
+      if(error)
+        throw error;
+
+      setCommentAuthor(data[0].username);
     })()
   }, []);
 
