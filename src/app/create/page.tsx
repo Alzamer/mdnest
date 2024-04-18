@@ -9,7 +9,9 @@ export default function Page(){
   const [value, setValue] = useState("");
   return <div className={style.container}>
     <div className={style.profile} data-color-mode="light">
-      <h1><Input placeholder='Title'/></h1>
+      <h1>
+        <Input placeholder='Title'/>
+      </h1>
       <h1>
         <MDEditor
           value={value}
