@@ -9,7 +9,7 @@
 .comments {
   width: 850px;
   height: 150px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
