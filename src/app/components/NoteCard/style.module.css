@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 250px;
   height: 350px;
   border-radius: 5px;
@@ -10,17 +10,17 @@
   transition: .1s;
 }
 
-.container:hover{
+.container:hover {
   cursor: pointer;
   box-shadow: 2px 2px 5px rgb(31, 106, 245);
 }
 
-.info{
+.info {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 
-.description{
+.description {
   width: 80%;
 }

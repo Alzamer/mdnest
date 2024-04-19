@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 80px;
   height: 80px;
   border-radius: 40px;
@@ -12,11 +12,11 @@
   background: orange;
 }
 
-.container:hover{
+.container:hover {
   cursor: pointer;
 }
 
-.handler{
+.handler {
   width: 100%;
   height: 100%;
   display: flex;

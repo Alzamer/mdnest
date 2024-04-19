@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 800px;
   height: 1100px;
   margin-left: 10px;
@@ -8,12 +8,12 @@
   align-items: start;
 }
 
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.pagination span:hover{
+.pagination span:hover {
   cursor: pointer;
 }

@@ -1,9 +1,9 @@
 import style from './style.module.css';
 import AddNote from '../AddNote';
 
-export default function Footer(){
+export default function Footer() {
   return <>
-    <AddNote/>
+    <AddNote />
     <div className={style.container}>
       <div className={style.column}>
         <p>Link #1</p>

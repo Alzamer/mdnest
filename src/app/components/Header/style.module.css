@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 100%;
   height: 55px;
   background: rgba(255, 255, 255, 0.5);
@@ -11,22 +11,22 @@
   border-bottom: 2px solid white;
 }
 
-.dark{
+.dark {
   background: rgba(28, 27, 34, 0.5);
 }
 
-.left{
+.left {
   display: flex;
   width: 15%;
 }
 
-.left span{
+.left span {
   margin-left: 10px;
   font-weight: 900;
   font-size: 36px;
 }
 
-.right{
+.right {
   display: flex;
   justify-content: space-around;
   align-items: baseline;
@@ -34,15 +34,15 @@
   height: 100%;
 }
 
-.rightSmall{
+.rightSmall {
   display: none;
 }
 
-.searchbar{
+.searchbar {
   width: 250px;
 }
 
-.darkMode{
+.darkMode {
   height: 100%;
   width: 50px;
   display: flex;
@@ -51,7 +51,7 @@
   cursor: pointer;
 }
 
-.modal{
+.modal {
   position: absolute;
   top: 30%;
   left: 50%;
@@ -61,26 +61,26 @@
   transform: translate(-50%, -50%);
 }
 
-.logo{
+.logo {
   font-family: "Whisper", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
-.right p{
+.right p {
   cursor: pointer;
 }
 
-.left .logo{
+.left .logo {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 576px){
-  .right{
+@media only screen and (max-width: 576px) {
+  .right {
     display: none;
   }
 
-  .rightSmall{
+  .rightSmall {
     display: flex;
     justify-content: center;
     align-items: center;

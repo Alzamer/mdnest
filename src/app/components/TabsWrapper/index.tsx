@@ -40,12 +40,12 @@ function a11yProps(index: number) {
   };
 }
 
-export default function TabsWrapper(){
+export default function TabsWrapper() {
   const [value, setValue] = useState(0);
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  
+
   return <div className={style.container}>
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">

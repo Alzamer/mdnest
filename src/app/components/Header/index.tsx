@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import style from './style.module.css';
 import { TiThMenu } from "react-icons/ti";
@@ -20,9 +20,9 @@ export default function Header() {
   useEffect(() => {
     let connection = null;
     (async () => {
-      const { data: { session }} = await supabase.auth.getSession();
-      
-      if(session === null)
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (session === null)
         return;
 
       setSession(session);
@@ -33,7 +33,7 @@ export default function Header() {
       })
     })();
 
-    return () => connection!.unsubscribe();
+    return () => connection! !== null ? connection!.unsubscribe() : null;
   }, []);
 
   useEffect(() => {

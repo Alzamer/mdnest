@@ -58,7 +58,7 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  if(!user){
+  if (!user) {
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);
@@ -66,7 +66,7 @@ export async function middleware(request: NextRequest) {
 
   return response
 }
- 
+
 export const config = {
   matcher: ['/profile', '/create'],
 }

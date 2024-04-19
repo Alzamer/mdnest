@@ -1,10 +1,10 @@
-.flexContainer{
+.flexContainer {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.container{
+.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

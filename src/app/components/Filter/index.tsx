@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import style from './style.module.css'
 import { Dropdown } from 'semantic-ui-react'
