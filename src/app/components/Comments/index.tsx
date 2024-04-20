@@ -9,9 +9,10 @@ import { Database } from '@/app/types/supabase';
 
 const supabase = createClient();
 
-export default function Comments({ children, id }: { children: ReactElement, id: string }) {
+export default function Comments({ children, id, uuid }: { children: ReactElement, id: string, uuid: string }) {
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState<Database['public']['Tables']['comments']['Row'][]>([]);
+
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase
@@ -45,20 +46,68 @@ export default function Comments({ children, id }: { children: ReactElement, id:
     })()
   };
 
+  const handleThumbs = async (upvote: boolean) => {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('upvoted, downvoted')
+      .match({
+        id: user!.id
+      });
+
+    if (error)
+      throw error;
+
+    if (data[0].upvoted?.includes(uuid) || data[0].downvoted?.includes(uuid))
+      return;
+
+    const updatedDownvotedColumn = {
+      downvoted: data[0].downvoted !== null ? [...data[0].downvoted, uuid] : [uuid],
+    };
+
+    const updatedUpvotedColumn = {
+      upvoted: data[0].upvoted !== null ? [...data[0].upvoted, uuid] : [uuid],
+    };
+
+    const updatedColumn = upvote ? updatedUpvotedColumn : updatedDownvotedColumn;
+
+    const { error: anotherError } = await supabase
+      .from('profiles')
+      .update(
+        updatedColumn
+      )
+      .match({
+        id: user!.id
+      });
+
+    if(anotherError)
+      throw anotherError;
+  };
+
   return <div className={style.container}>
-    <div className={style.content}>
-      {
-        children
-      }
+    <div className={style.contentContainer}>
+      <div className={style.thumbs}>
+        <span onClick={() => handleThumbs(true)}>👍</span>
+        <span onClick={() => handleThumbs(false)}>👎</span>
+      </div>
+      <div className={style.content}>
+        {
+          children
+        }
+      </div>
     </div>
     <div className={style.comments}>
       <div className={style.input}>
-        <Input size='massive' placeholder='Add comment' value={commentText} onChange={(e) => setCommentText(e.target.value)} />
+        <Input size='massive' placeholder='Add comment' value={commentText} onChange={e => setCommentText(e.target.value)} />
         <Button onClick={() => insertComment()}>Add comment</Button>
       </div>
       <div>
         {
-          comments ? comments.map((row: any) => <Comment author={row.author} comment={row.comment} createdAt={row.createdAt} />) : <p>Loading...</p>
+          comments ? comments.map(row => <Comment author={row.author}
+            comment={row.comment}
+            createdAt={row.createdAt}
+          />) : <p>Loading...</p>
         }
       </div>
     </div>

@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function Page({ params }: { params: { id: string } }) {
   return <div className={styles.container}>
-    <Comments id={params.id}>
+    <Comments id={params.id} uuid={params.id}>
       <Suspense fallback={<h1>Loading...</h1>}>
         <NoteWrapper uuid={params.id} />
       </Suspense>
