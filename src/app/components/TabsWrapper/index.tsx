@@ -87,6 +87,7 @@ export default function TabsWrapper() {
             uuid={row.id}
             createdAt={row.createdAt}
             content={row.content}
+            key={row.id}
           />) 
           : <div>Loading...</div>
       }
