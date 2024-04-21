@@ -46,7 +46,7 @@ function a11yProps(index: number) {
 
 export default function TabsWrapper() {
   const [value, setValue] = useState(0);
-  const [notes, setNotes] = useState<{ title: string; createdAt: string; content: string; }[] | null>(null);
+  const [notes, setNotes] = useState<{ id: string, title: string; createdAt: string; content: string; }[] | null>(null);
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

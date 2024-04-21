@@ -14,3 +14,13 @@
 .titleHeader p u{
   cursor: pointer;
 }
+
+.right{
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+}
+
+.right p{
+  cursor: pointer;
+}

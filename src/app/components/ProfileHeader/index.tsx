@@ -1,6 +1,5 @@
 import style from './style.module.css';
 import { createClient } from '../../../../utils/supabase/server';
-import { Database } from '@/app/types/supabase';
 
 const supabase = createClient();
 
@@ -32,5 +31,5 @@ export default async function ProfileHeader() {
         <p className={style.date}></p>
       </div>
     </div>
-  </div>
+  </div>;
 }
