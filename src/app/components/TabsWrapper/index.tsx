@@ -72,6 +72,16 @@ export default function TabsWrapper() {
     })();
   }, []);
 
+  const deleteNote = async (uuid: string) => {
+    const { error } = await supabase
+      .from('notes')
+      .delete()
+      .eq('id', uuid);
+
+    if (error)
+      throw error;
+  };
+
   return <div className={style.container}>
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -81,14 +91,15 @@ export default function TabsWrapper() {
     </Box>
     <CustomTabPanel value={value} index={0}>
       {
-        notes !== null ? notes.map(row => 
+        notes !== null ? notes.map(row =>
           <TabEntity
             title={row.title}
             uuid={row.id}
             createdAt={row.createdAt}
             content={row.content}
             key={row.id}
-          />) 
+            handleDelete={deleteNote}
+          />)
           : <div>Loading...</div>
       }
     </CustomTabPanel>
