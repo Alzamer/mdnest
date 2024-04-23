@@ -87,6 +87,16 @@ export default function TabsWrapper() {
     setNotes([...notes.filter(el => el.id !== uuid)]);
   };
 
+  const updateNote = async (uuid: string, content: string) => {
+    const { error } = await supabase
+      .from('notes')
+      .update({ content: content })
+      .eq('id', uuid)
+
+    if (error)
+      throw error;
+  };
+
   return <div className={style.container}>
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -104,6 +114,7 @@ export default function TabsWrapper() {
             content={row.content}
             key={row.id}
             handleDelete={deleteNote}
+            handleEdit={updateNote}
           />)
           : <div>Loading...</div>
       }
