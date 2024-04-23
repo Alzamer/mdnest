@@ -80,6 +80,11 @@ export default function TabsWrapper() {
 
     if (error)
       throw error;
+
+    if (notes === null)
+      return;
+
+    setNotes([...notes.filter(el => el.id !== uuid)]);
   };
 
   return <div className={style.container}>

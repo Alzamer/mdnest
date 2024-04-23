@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './style.module.css';
 import { useRouter } from 'next/navigation';
 import { IoPencil, IoTrashBin } from 'react-icons/io5';
@@ -31,7 +31,7 @@ export default function TabEntity({ title, createdAt, content, uuid, handleDelet
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column'
-    },
+    }
   };
 
   return <div className={styles.container}>
@@ -59,7 +59,11 @@ export default function TabEntity({ title, createdAt, content, uuid, handleDelet
       contentLabel="Example Modal"
     >
       <p>Are you sure you want to delete this note?</p>
-      <Button variant="contained" onClick={() => handleDelete(uuid)}>
+      <Button variant="contained" onClick={() => {
+        handleDelete(uuid)
+        setModal(false);
+      }
+      }>
         Yes!
       </Button>
     </Modal>
