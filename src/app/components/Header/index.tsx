@@ -9,6 +9,12 @@ import { Auth } from '@supabase/auth-ui-react'
 import { createClient } from '../../../../utils/supabase/client';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useRouter } from 'next/navigation'
+import { Whisper } from '@next/font/google';
+
+const whisper = Whisper({
+  weight: '400',
+  subsets: ['latin']
+});
 
 const supabase = createClient();
 
@@ -50,8 +56,8 @@ export default function Header() {
   Modal.setAppElement('body');
 
   return <div className={`${style.container}`}>
-    <div className={style.left}>
-      <span className={style.logo} onClick={() => router.push('/')}>MDNest</span>
+    <div className={`${style.left}`}>
+      <span className={`${whisper.className} ${style.logo}`} onClick={() => router.push('/')}>MDNest</span>
     </div>
     <div className={style.searchbar}>
 
