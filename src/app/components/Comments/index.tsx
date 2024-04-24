@@ -5,13 +5,17 @@ import style from './style.module.css'
 import { ReactElement, useEffect, useState } from 'react';
 import { createClient } from '../../../../utils/supabase/client';
 import Comment from '../Comment';
+import { ToastContainer, toast } from 'react-toastify';
 import { Database } from '@/app/types/supabase';
+import 'react-toastify/dist/ReactToastify.css';
 
 const supabase = createClient();
 
 export default function Comments({ children, id, uuid }: { children: ReactElement, id: string, uuid: string }) {
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState<Database['public']['Tables']['comments']['Row'][]>([]);
+
+  const notify = (msg: string) => toast(msg);
 
   useEffect(() => {
     (async () => {
@@ -43,6 +47,8 @@ export default function Comments({ children, id, uuid }: { children: ReactElemen
 
       if (error)
         throw error;
+
+      notify('You\'ve just added a comment!');
     })()
   };
 
@@ -83,6 +89,11 @@ export default function Comments({ children, id, uuid }: { children: ReactElemen
 
     if(anotherError)
       throw anotherError;
+
+    if(upvote)
+      notify('You\'ve just upvoted a note!');
+    else
+      notify('You\'ve just downvoted a note!');
   };
 
   return <div className={style.container}>
@@ -111,5 +122,6 @@ export default function Comments({ children, id, uuid }: { children: ReactElemen
         }
       </div>
     </div>
+    <ToastContainer />
   </div>;
 }

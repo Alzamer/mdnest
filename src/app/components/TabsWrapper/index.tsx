@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import { ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 import style from './style.module.css';
 import { createClient } from '../../../../utils/supabase/client';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -51,6 +53,8 @@ export default function TabsWrapper() {
     setValue(newValue);
   };
 
+  const notify = (msg: string) => toast(msg);
+
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase.auth.getSession();
@@ -85,6 +89,7 @@ export default function TabsWrapper() {
       return;
 
     setNotes([...notes.filter(el => el.id !== uuid)]);
+    notify('You\'ve just deleted a note!');
   };
 
   const updateNote = async (uuid: string, content: string) => {
@@ -95,6 +100,8 @@ export default function TabsWrapper() {
 
     if (error)
       throw error;
+
+    notify('You\'ve just updated a note!');
   };
 
   return <div className={style.container}>
@@ -122,5 +129,6 @@ export default function TabsWrapper() {
     <CustomTabPanel value={value} index={1}>
       Activity
     </CustomTabPanel>
+    <ToastContainer />
   </div>;
 }
