@@ -6,7 +6,6 @@ import { Input, Button } from 'semantic-ui-react'
 import MDEditor from '@uiw/react-md-editor';
 import { useRouter } from 'next/navigation';
 import { createClient } from '../../../utils/supabase/client';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const supabase = createClient();
@@ -39,8 +38,6 @@ export default function Page() {
     addNote();
   };
 
-  const notify = () => toast("Wow so easy!");
-
   return <div className={style.container}>
     <div className={style.profile} data-color-mode="light">
       <h1>
@@ -61,7 +58,6 @@ export default function Page() {
       <Button primary onClick={handleSubmit}>
         Add note
       </Button>
-      <ToastContainer/>
     </div>
   </div>;
 }

@@ -123,11 +123,11 @@ export default function TabsWrapper() {
             handleDelete={deleteNote}
             handleEdit={updateNote}
           />)
-          : <div>Loading...</div>
+          : null
       }
     </CustomTabPanel>
     <CustomTabPanel value={value} index={1}>
-      Activity
+      
     </CustomTabPanel>
     <ToastContainer />
   </div>;
