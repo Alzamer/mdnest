@@ -1,5 +1,5 @@
 import { Database } from '@/app/types/supabase';
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export function createClient() {
@@ -17,3 +17,7 @@ export function createClient() {
     }
   );
 }
+
+const supabase = createClient();
+
+export default supabase;

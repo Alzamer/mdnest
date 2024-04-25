@@ -6,7 +6,7 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { Auth } from '@supabase/auth-ui-react'
-import { createClient } from '../../../../utils/supabase/client';
+import supabase from '../../../../utils/supabase/client';
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useRouter } from 'next/navigation'
 import { Whisper } from '@next/font/google';
@@ -15,8 +15,6 @@ const whisper = Whisper({
   weight: '400',
   subsets: ['latin']
 });
-
-const supabase = createClient();
 
 export default function Header() {
   const router = useRouter();
@@ -33,6 +31,7 @@ export default function Header() {
 
       setSession(session);
 
+      
       const { data: { subscription } } = await supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session);
         connection = subscription;

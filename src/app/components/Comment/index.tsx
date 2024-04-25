@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './style.module.css';
-import { createClient } from '../../../../utils/supabase/client';
-
-const supabase = createClient();
+import supabase from '../../../../utils/supabase/client';
 
 export default function Comment({ author, comment, createdAt }: { author: string, comment: string, createdAt: string }) {
   const [commentAuthor, setCommentAuthor] = useState('');

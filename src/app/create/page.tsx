@@ -5,10 +5,8 @@ import { useState } from 'react';
 import { Input, Button } from 'semantic-ui-react'
 import MDEditor from '@uiw/react-md-editor';
 import { useRouter } from 'next/navigation';
-import { createClient } from '../../../utils/supabase/client';
+import supabase from '../../../utils/supabase/client';
 import 'react-toastify/dist/ReactToastify.css';
-
-const supabase = createClient();
 
 export default function Page() {
   const [title, setTitle] = useState("");
@@ -27,7 +25,7 @@ export default function Page() {
 
     if (error)
       throw error;
-    
+
     router.push(`/`);
   };
 

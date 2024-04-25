@@ -3,13 +3,11 @@
 import { Input, Button } from 'semantic-ui-react'
 import style from './style.module.css'
 import { ReactElement, useEffect, useState } from 'react';
-import { createClient } from '../../../../utils/supabase/client';
+import supabase from '../../../../utils/supabase/client';
 import Comment from '../Comment';
 import { ToastContainer, toast } from 'react-toastify';
 import { Database } from '@/app/types/supabase';
 import 'react-toastify/dist/ReactToastify.css';
-
-const supabase = createClient();
 
 export default function Comments({ children, id, uuid }: { children: ReactElement, id: string, uuid: string }) {
   const [commentText, setCommentText] = useState('');

@@ -7,7 +7,7 @@ import TabEntity from '../TabEntity';
 import Typography from '@mui/material/Typography';
 import { ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 import style from './style.module.css';
-import { createClient } from '../../../../utils/supabase/client';
+import supabase from '../../../../utils/supabase/client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,8 +16,6 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
-
-const supabase = createClient();
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
