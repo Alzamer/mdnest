@@ -1,12 +1,11 @@
-'use server';
-
 import styles from './style.module.css';
 import { marked } from 'marked';
-import { createClient} from '../../../../utils/supabase/server';
+import { createClient } from '../../../../utils/supabase/server';
 import parse from 'html-react-parser';
 
 export default async function NoteWrapper({ uuid }: { uuid: string }) {
   const supabase = createClient();
+  
   const { data, error } = await supabase
     .from('notes')
     .select()
