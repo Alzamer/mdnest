@@ -1,12 +1,12 @@
-import { Suspense } from 'react';
+import { Suspense } from "react";
 import styles from "./page.module.css";
-import Content from './components/Content';
-import MainPageWrapper from './components/MainPageWrapper';
-import { Lato } from '@next/font/google';
+import Content from "./components/Content";
+import MainPageWrapper from "./components/MainPageWrapper";
+import { Lato } from "@next/font/google";
 
 const lato = Lato({
-  weight: '400',
-  subsets: ['latin']
+  weight: "400",
+  subsets: ["latin"],
 });
 
 export default function Home({

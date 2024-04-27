@@ -23,7 +23,7 @@
   width: 950px;
 }
 
-.thumbs{
+.thumbs {
   width: 120px;
   height: 300px;
   display: flex;
@@ -31,15 +31,15 @@
   align-items: center;
 }
 
-.thumbs span{
+.thumbs span {
   font-size: 48px;
 }
 
-.thumbs span:hover{
+.thumbs span:hover {
   cursor: pointer;
 }
 
-.contentContainer{
+.contentContainer {
   display: flex;
   width: 1070px;
 }

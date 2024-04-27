@@ -1,26 +1,26 @@
-.container{
+.container {
   width: 100%;
   height: 75px;
   margin-top: 10px;
   border-bottom: 1px solid black;
 }
 
-.titleHeader{
+.titleHeader {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.titleHeader p u{
+.titleHeader p u {
   cursor: pointer;
 }
 
-.right{
+.right {
   display: flex;
   width: 150px;
   justify-content: space-around;
 }
 
-.right p{
+.right p {
   cursor: pointer;
 }
