@@ -1,9 +1,10 @@
 import style from './style.module.css'
 import NoteCard from '../NoteCard';
 import Pagination from '../Pagination';
-import supabase from '../../../../utils/supabase/server';
+import { createClient } from '../../../../utils/supabase/server';
 
 const CARDS_ON_PAGE = 9;
+const supabase = createClient();
 
 export default async function Content({
   searchParams,
