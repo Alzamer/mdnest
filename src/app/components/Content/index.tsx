@@ -21,9 +21,11 @@ export default async function Content({
     .from("notes")
     .select("*", { count: "exact" });
 
-  if (count === null) count = 0;
+  if (count === null)
+    count = 0;
 
-  if (currentPage < 0) currentPage = 0;
+  if (currentPage < 0)
+    currentPage = 0;
 
   const NUMBER_OF_PAGES = Math.floor(count / CARDS_ON_PAGE);
 

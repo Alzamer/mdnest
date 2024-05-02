@@ -57,7 +57,7 @@ export default function Comments({
 
   const handleThumbs = async (upvote: boolean) => {
     const {
-      data: { user },
+      data: { user }
     } = await supabase.auth.getUser();
 
     const { data, error } = await supabase
@@ -69,25 +69,25 @@ export default function Comments({
 
     if (error) throw error;
 
-    if (data[0].upvoted?.includes(uuid) || data[0].downvoted?.includes(uuid))
-      return;
+    if (!upvote){
+      data[0].upvoted = data[0].upvoted !== null ? data[0].upvoted.filter(e => e !== uuid) : null;
 
-    const updatedDownvotedColumn = {
-      downvoted:
-        data[0].downvoted !== null ? [...data[0].downvoted, uuid] : [uuid],
-    };
+      if(!data[0].downvoted?.includes(uuid))
+        data[0].downvoted = data[0].downvoted !== null ? [...data[0].downvoted, uuid] : [uuid];
+    }
+    else if (upvote){
+      data[0].downvoted = data[0].downvoted !== null ? data[0].downvoted.filter(e => e !== uuid) : null;
 
-    const updatedUpvotedColumn = {
-      upvoted: data[0].upvoted !== null ? [...data[0].upvoted, uuid] : [uuid],
-    };
-
-    const updatedColumn = upvote
-      ? updatedUpvotedColumn
-      : updatedDownvotedColumn;
+      if(!data[0].upvoted?.includes(uuid))
+        data[0].upvoted = data[0].upvoted !== null ? [...data[0].upvoted, uuid] : [uuid];
+    }
 
     const { error: anotherError } = await supabase
       .from("profiles")
-      .update(updatedColumn)
+      .update({
+        upvoted: data[0].upvoted,
+        downvoted: data[0].downvoted
+      })
       .match({
         id: user!.id,
       });
