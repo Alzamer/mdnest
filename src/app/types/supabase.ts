@@ -4,175 +4,146 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[];
+  | Json[]
 
 export type Database = {
   public: {
     Tables: {
-      activities: {
+      activity: {
         Row: {
-          create: string;
-          follow: boolean;
-          id: string;
-          note: string;
-          upvote: boolean;
-        };
+          content: string
+          created_at: string
+          id: string
+        }
         Insert: {
-          create?: string;
-          follow: boolean;
-          id?: string;
-          note: string;
-          upvote: boolean;
-        };
+          content: string
+          created_at?: string
+          id?: string
+        }
         Update: {
-          create?: string;
-          follow?: boolean;
-          id?: string;
-          note?: string;
-          upvote?: boolean;
-        };
+          content?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      comment: {
+        Row: {
+          author: string
+          content: string
+          createdAt: string
+          id: string
+        }
+        Insert: {
+          author: string
+          content: string
+          createdAt?: string
+          id?: string
+        }
+        Update: {
+          author?: string
+          content?: string
+          createdAt?: string
+          id?: string
+        }
         Relationships: [
           {
-            foreignKeyName: "public_activity_note_fkey";
-            columns: ["note"];
-            isOneToOne: false;
-            referencedRelation: "notes";
-            referencedColumns: ["id"];
+            foreignKeyName: "comment_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
           },
-        ];
-      };
-      comments: {
+        ]
+      }
+      note: {
         Row: {
-          author: string;
-          comment: string;
-          createdAt: string;
-          id: string;
-          note: string;
-        };
+          author: string
+          comments: string[]
+          content: string
+          createdAt: string
+          downvotes: number
+          id: string
+          title: string
+          upvotes: number
+        }
         Insert: {
-          author: string;
-          comment: string;
-          createdAt?: string;
-          id?: string;
-          note: string;
-        };
+          author: string
+          comments: string[]
+          content: string
+          createdAt?: string
+          downvotes?: number
+          id?: string
+          title: string
+          upvotes?: number
+        }
         Update: {
-          author?: string;
-          comment?: string;
-          createdAt?: string;
-          id?: string;
-          note?: string;
-        };
+          author?: string
+          comments?: string[]
+          content?: string
+          createdAt?: string
+          downvotes?: number
+          id?: string
+          title?: string
+          upvotes?: number
+        }
         Relationships: [
           {
-            foreignKeyName: "public_comments_author_fkey";
-            columns: ["author"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
+            foreignKeyName: "note_author_fkey"
+            columns: ["author"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "public_comments_note_fkey";
-            columns: ["note"];
-            isOneToOne: false;
-            referencedRelation: "notes";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      notes: {
+        ]
+      }
+      profile: {
         Row: {
-          author: string;
-          content: string;
-          createdAt: string;
-          downvotes: number;
-          id: string;
-          title: string;
-          upvotes: number;
-        };
+          activities: string[]
+          downvoted: string[]
+          following: string[]
+          id: string
+          picture: string
+          upvoted: string[]
+          username: string
+        }
         Insert: {
-          author: string;
-          content: string;
-          createdAt?: string;
-          downvotes?: number;
-          id?: string;
-          title: string;
-          upvotes?: number;
-        };
+          activities: string[]
+          downvoted: string[]
+          following: string[]
+          id?: string
+          picture?: string
+          upvoted: string[]
+          username: string
+        }
         Update: {
-          author?: string;
-          content?: string;
-          createdAt?: string;
-          downvotes?: number;
-          id?: string;
-          title?: string;
-          upvotes?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "public_notes_author_fkey";
-            columns: ["author"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      profiles: {
-        Row: {
-          activity: string[] | null;
-          downvoted: string[] | null;
-          following: string[] | null;
-          id: string;
-          picture: string | null;
-          upvoted: string[] | null;
-          username: string;
-        };
-        Insert: {
-          activity?: string[] | null;
-          downvoted?: string[] | null;
-          following?: string[] | null;
-          id: string;
-          picture?: string | null;
-          upvoted?: string[] | null;
-          username: string;
-        };
-        Update: {
-          activity?: string[] | null;
-          downvoted?: string[] | null;
-          following?: string[] | null;
-          id?: string;
-          picture?: string | null;
-          upvoted?: string[] | null;
-          username?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "profiles_id_fkey";
-            columns: ["id"];
-            isOneToOne: true;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-    };
+          activities?: string[]
+          downvoted?: string[]
+          following?: string[]
+          id?: string
+          picture?: string
+          upvoted?: string[]
+          username?: string
+        }
+        Relationships: []
+      }
+    }
     Views: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
-};
+      [_ in never]: never
+    }
+  }
+}
 
-type PublicSchema = Database[Extract<keyof Database, "public">];
+type PublicSchema = Database[Extract<keyof Database, "public">]
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -185,7 +156,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R;
+      Row: infer R
     }
     ? R
     : never
@@ -193,11 +164,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R;
+        Row: infer R
       }
       ? R
       : never
-    : never;
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -208,17 +179,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I;
+      Insert: infer I
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I;
+        Insert: infer I
       }
       ? I
       : never
-    : never;
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -229,17 +200,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U;
+      Update: infer U
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U;
+        Update: infer U
       }
       ? U
       : never
-    : never;
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -252,4 +223,4 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never;
+    : never
