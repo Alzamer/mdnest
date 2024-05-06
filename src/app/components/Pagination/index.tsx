@@ -1,9 +1,9 @@
 "use client";
 
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { useRouter, usePathname } from "next/navigation";
+import * as PaginationMui from '@mui/material/Pagination';
 import styles from "./style.module.css";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export default function Pagination({
   children,
@@ -12,30 +12,20 @@ export default function Pagination({
   children: ReactNode;
   count: number;
 }) {
-  const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const [page, setPage] = useState(1);
 
-  const handleClick = (change: number) => {
-    let search = Number(searchParams.get("page"));
-
-    if (change === -1 && search === 0) return;
-
-    if (change === 1 && search === count) return;
-
-    replace(`${pathname}?page=${Number(search) + change}`);
-  };
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    replace(`${pathname}?page=${value}`);
+  }
 
   return (
     <>
       <main className={styles.container}>{children}</main>
       <div className={styles.pagination}>
-        <span style={{ fontSize: "32px" }} onClick={() => handleClick(-1)}>
-          <FaAngleLeft />
-        </span>
-        <span style={{ fontSize: "32px" }} onClick={() => handleClick(1)}>
-          <FaAngleRight />
-        </span>
+      <PaginationMui.default count={count} page={page} onChange={handleChange}/>
       </div>
     </>
   );
