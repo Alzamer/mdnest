@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import supabase from "../../../../utils/supabase/client";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Whisper } from "@next/font/google";
+import { Whisper } from "next/font/google";
 import { useRouter } from "next/navigation";
 import useSignOut from "../../../../utils/hooks/useSignOut";
 import useGetUser from "../../../../utils/hooks/useGetUser";
