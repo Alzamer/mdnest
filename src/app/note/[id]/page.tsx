@@ -4,6 +4,7 @@ import NoteWrapper from "@/app/components/NoteWrapper";
 import { Suspense } from "react";
 
 export default function Page({ params }: { params: { id: string } }) {
+  console.log(params)
   return (
     <div className={styles.container}>
       <Comments id={params.id} uuid={params.id}>

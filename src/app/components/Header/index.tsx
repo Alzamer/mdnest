@@ -8,8 +8,9 @@ import { useState, useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import supabase from "../../../../utils/supabase/client";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useRouter } from "next/navigation";
 import { Whisper } from "@next/font/google";
+import { useRouter } from "next/navigation";
+import useSignOut from "../../../../utils/hooks/useSignOut";
 
 const whisper = Whisper({
   weight: "400",
@@ -47,11 +48,6 @@ export default function Header() {
     if (session !== null) setSignInModal(false);
   }, [session]);
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
-  };
-
   Modal.setAppElement("body");
 
   return (
@@ -72,7 +68,7 @@ export default function Header() {
         {session ? (
           <>
             <p onClick={() => router.push("/profile")}>Profile</p>
-            <p onClick={handleSignOut}>Sign Out</p>
+            <p onClick={() => useSignOut(router)}>Sign Out</p>
           </>
         ) : (
           <p onClick={() => setSignInModal(true)}>Sign In</p>

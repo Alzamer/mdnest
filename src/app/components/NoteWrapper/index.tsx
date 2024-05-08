@@ -6,11 +6,12 @@ import parse from "html-react-parser";
 export default async function NoteWrapper({ uuid }: { uuid: string }) {
   const supabase = createClient();
 
-  const { data, error } = await supabase.from("notes").select().match({
+  const { data, error } = await supabase.from("note").select().match({
     id: uuid,
   });
 
-  if (error) throw error;
+  if (error)
+    return <p>Couldn't fetch data! {error.message}</p>;
 
   const content = await marked.parse(data![0].content);
 

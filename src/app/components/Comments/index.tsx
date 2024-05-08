@@ -20,90 +20,15 @@ export default function Comments({
 }) {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState<
-    Database["public"]["Tables"]["comments"]["Row"][]
+    Database["public"]["Tables"]["comment"]["Row"][]
   >([]);
-
-  const notify = (msg: string) => toast(msg);
-
-  useEffect(() => {
-    (async () => {
-      const { data, error } = await supabase.from("comments").select().match({
-        note: id,
-      });
-
-      if (error) throw error;
-
-      setComments(data);
-    })();
-  });
-
-  const insertComment = async () => {
-    (async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      const { error } = await supabase.from("comments").insert({
-        note: id,
-        author: user!.id,
-        comment: commentText,
-      });
-      setCommentText("");
-
-      if (error) throw error;
-
-      notify("You've just added a comment!");
-    })();
-  };
-
-  const handleThumbs = async (upvote: boolean) => {
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("upvoted, downvoted")
-      .match({
-        id: user!.id,
-      });
-
-    if (error) throw error;
-
-    if (!upvote){
-      data[0].upvoted = data[0].upvoted !== null ? data[0].upvoted.filter(e => e !== uuid) : null;
-
-      if(!data[0].downvoted?.includes(uuid))
-        data[0].downvoted = data[0].downvoted !== null ? [...data[0].downvoted, uuid] : [uuid];
-    }
-    else if (upvote){
-      data[0].downvoted = data[0].downvoted !== null ? data[0].downvoted.filter(e => e !== uuid) : null;
-
-      if(!data[0].upvoted?.includes(uuid))
-        data[0].upvoted = data[0].upvoted !== null ? [...data[0].upvoted, uuid] : [uuid];
-    }
-
-    const { error: anotherError } = await supabase
-      .from("profiles")
-      .update({
-        upvoted: data[0].upvoted,
-        downvoted: data[0].downvoted
-      })
-      .match({
-        id: user!.id,
-      });
-
-    if (anotherError) throw anotherError;
-
-    if (upvote) notify("You've just upvoted a note!");
-    else notify("You've just downvoted a note!");
-  };
 
   return (
     <div className={style.container}>
       <div className={style.contentContainer}>
         <div className={style.thumbs}>
-          <span onClick={() => handleThumbs(true)}>👍</span>
-          <span onClick={() => handleThumbs(false)}>👎</span>
+          <span>👍</span>
+          <span>👎</span>
         </div>
         <div className={style.content}>{children}</div>
       </div>
@@ -115,20 +40,12 @@ export default function Comments({
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
           />
-          <Button onClick={() => insertComment()}>Add comment</Button>
+          <Button>Add comment</Button>
         </div>
         <div>
-          {comments ? (
-            comments.map((row) => (
-              <Comment
-                author={row.author}
-                comment={row.comment}
-                createdAt={row.createdAt}
-              />
-            ))
-          ) : (
-            <p>Loading...</p>
-          )}
+          {
+            
+          }
         </div>
       </div>
       <ToastContainer />
