@@ -4,13 +4,14 @@ import style from "./style.module.css";
 import { TiThMenu } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Modal from "react-modal";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import supabase from "../../../../utils/supabase/client";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Whisper } from "@next/font/google";
 import { useRouter } from "next/navigation";
 import useSignOut from "../../../../utils/hooks/useSignOut";
+import useGetUser from "../../../../utils/hooks/useGetUser";
 
 const whisper = Whisper({
   weight: "400",
@@ -20,33 +21,12 @@ const whisper = Whisper({
 export default function Header() {
   const router = useRouter();
   const [signInModal, setSignInModal] = useState(false);
-  const [session, setSession] = useState<any>();
+  const { user } = useGetUser();
 
   useEffect(() => {
-    let connection = null;
-    (async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (session === null) return;
-
-      setSession(session);
-
-      const {
-        data: { subscription },
-      } = await supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session);
-        connection = subscription;
-      });
-    })();
-
-    return () => (connection! !== null ? connection!.unsubscribe() : null);
-  }, []);
-
-  useEffect(() => {
-    if (session !== null) setSignInModal(false);
-  }, [session]);
+    if(user)
+    setSignInModal(false);
+  }, [user]);
 
   Modal.setAppElement("body");
 
@@ -65,7 +45,7 @@ export default function Header() {
         <div className={style.darkMode}>
           <MdOutlineDarkMode />
         </div>
-        {session ? (
+        {user ? (
           <>
             <p onClick={() => router.push("/profile")}>Profile</p>
             <p onClick={() => useSignOut(router)}>Sign Out</p>
