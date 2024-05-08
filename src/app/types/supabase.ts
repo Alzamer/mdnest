@@ -51,7 +51,7 @@ export type Database = {
             foreignKeyName: "comment_author_fkey"
             columns: ["author"]
             isOneToOne: false
-            referencedRelation: "profile"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -92,12 +92,12 @@ export type Database = {
             foreignKeyName: "note_author_fkey"
             columns: ["author"]
             isOneToOne: false
-            referencedRelation: "profile"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
       }
-      profile: {
+      profiles: {
         Row: {
           activities: string[]
           downvoted: string[]

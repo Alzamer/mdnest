@@ -13,7 +13,7 @@ interface note {
   uuid: string;
 }
 
-export default async function NoteCard({
+export default function NoteCard({
   title,
   author,
   upvotes,
