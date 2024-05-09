@@ -8,12 +8,11 @@ import useGetUser from "../../../../utils/hooks/useGetUser";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { user, userIsNull } = useGetUser(params.id);
-
-  if(user === null)
-    return <p>Loading...</p>;
-
   if (userIsNull)
     redirect('/');
+
+  if (user === null)
+    return <p>Loading...</p>;
 
   return (
     <div className={style.flexContainer}>
