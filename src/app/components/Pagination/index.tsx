@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSearchParams } from 'next/navigation'
 import { TailSpin } from 'react-loader-spinner'
 import NoteCard from "../NoteCard";
 import * as PaginationMui from '@mui/material/Pagination';
 import styles from "./style.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useFetchNotes from '../../../../utils/hooks/useFetchNotes'
 
 export default function Pagination({

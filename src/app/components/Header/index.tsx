@@ -11,7 +11,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Whisper } from "next/font/google";
 import { useRouter } from "next/navigation";
 import useSignOut from "../../../../utils/hooks/useSignOut";
-import useGetUser from "../../../../utils/hooks/useGetUser";
+import useGetCurrentUser from "../../../../utils/hooks/useGetCurrentUser";
 
 const whisper = Whisper({
   weight: "400",
@@ -21,7 +21,7 @@ const whisper = Whisper({
 export default function Header() {
   const router = useRouter();
   const [signInModal, setSignInModal] = useState(false);
-  const { user } = useGetUser();
+  const { user } = useGetCurrentUser();
 
   useEffect(() => {
     if(user)

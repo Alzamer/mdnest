@@ -1,28 +1,40 @@
-import { useState, useEffect } from "react";
 import supabase from "../supabase/client";
-import { Session } from "@supabase/supabase-js";
+import { useState, useEffect } from "react";
 
-export default function useGetUser() {
-  const [currentSession, setCurrentSession] = useState<Session | null>();
+interface user {
+  activities: string[];
+  downvoted: string[];
+  following: string[];
+  id: string;
+  picture: string;
+  upvoted: string[];
+  username: string;
+};
+
+export default function useGetUser(id: string) {
+  const [user, setUser] = useState<user | null>(null);
+  const [userIsNull, setUserIsNull] = useState(false);
+
   useEffect(() => {
-    async function retrieveSession() {
-      const { data: { session } } = await supabase.auth.getSession();
-      setCurrentSession(session);
+    async function fetchUser() {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select()
+        .match({
+          id: id
+        });
 
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
-        console.log("ZMIANA STANU NA ", session);
-        setCurrentSession(session);
-      });
-
-      return () => subscription.unsubscribe();
+      if (data === null || error)
+        setUserIsNull(true);
+      else
+        setUser(data[0]);
     }
 
-    retrieveSession();
-  }, []);
+    fetchUser();
+  }, [])
 
   return {
-    user: currentSession
+    user: user,
+    userIsNull: userIsNull
   }
 };

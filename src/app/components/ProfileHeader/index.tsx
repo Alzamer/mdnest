@@ -1,23 +1,10 @@
 import style from "./style.module.css";
-import { createClient } from "../../../../utils/supabase/server";
 
-const supabase = createClient();
-
-export default async function ProfileHeader() {
-  const {
-    data: { user },
-    error: getUserError,
-  } = await supabase.auth.getUser();
-
-  if (getUserError) throw getUserError;
-
-  if (user === null) return;
-
-  const { data, error } = await supabase.from("profiles").select().match({
-    id: user.id,
-  });
-
-  if (error) throw error;
+export default function ProfileHeader({ picture, username, date } : {
+  picture: string,
+  username: string,
+  date: string
+}) {
 
   return (
     <div className={style.profile}>
@@ -25,13 +12,13 @@ export default async function ProfileHeader() {
         <div
           className={style.picture}
           style={{
-            backgroundImage: `url(${data[0].picture})`,
+            backgroundImage: `url(${picture})`,
             backgroundPosition: "center",
           }}
         ></div>
         <div>
-          <p className={style.username}>{data[0].username}</p>
-          <p className={style.date}></p>
+          <p className={style.username}>{ username }</p>
+          <p className={style.date}>Created: { date }</p>
         </div>
       </div>
     </div>
