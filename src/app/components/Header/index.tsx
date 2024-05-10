@@ -47,7 +47,7 @@ export default function Header() {
         </div>
         {user ? (
           <>
-            <p onClick={() => router.push("/profile")}>Profile</p>
+            <p onClick={() => router.push(`/profile/${user?.user.id}`)}>Profile</p>
             <p onClick={() => useSignOut(router)}>Sign Out</p>
           </>
         ) : (
