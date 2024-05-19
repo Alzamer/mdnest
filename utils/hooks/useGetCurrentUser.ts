@@ -22,6 +22,6 @@ export default function useGetCurrentUser() {
   }, []);
 
   return {
-    user: currentSession
+    user: currentSession ? currentSession : null
   }
 };

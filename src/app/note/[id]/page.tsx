@@ -7,8 +7,8 @@ import { Suspense } from "react";
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <div className={styles.container}>
-      <Comments id={params.id} uuid={params.id}>
-        <Suspense fallback={<TailSpinWrapper/>}>
+      <Comments uuid={params.id}>
+        <Suspense fallback={<TailSpinWrapper />}>
           <NoteWrapper uuid={params.id} />
         </Suspense>
       </Comments>
